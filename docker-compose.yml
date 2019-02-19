@@ -17,8 +17,8 @@ services:
     ports:
       - "8787:8787"
     environment:
-      - "PASSWORD=${PWD_VAR}"
-      - "USER=${USERNAME}"
+      "PASSWORD:${PWD_VAR}"
+      "USER:${USERNAME}"
     volumes:
       - shared-data:/home/rstudio/shareddata
     restart: on-failure
