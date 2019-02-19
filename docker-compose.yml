@@ -6,15 +6,20 @@ services:
       - "8888:8888"
     volumes:
       - shared-data:/home/jovyan
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GEN_CERT=yes
+    command: "start-notebook.sh \
+        --NotebookApp.password=${ACCESS_TOKEN}"
     restart: on-failure
-    
-    # replace the hashed password in this command with your own generated with IPython.lib.passwd
-    command: /home/root/startup_playground.sh # --NotebookApp.base_url=/home/jovyan
 
   rstudio:
     image: rocker/geospatial
     ports:
       - "8787:8787"
+    environment:
+      - PASSWORD="${PWD_VAR}"
+      - USER="${USERNAME}"
     volumes:
       - shared-data:/home/rstudio/shareddata
     restart: on-failure
