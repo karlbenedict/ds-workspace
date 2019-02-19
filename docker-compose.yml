@@ -1,0 +1,23 @@
+version: '3'
+services:
+  jupyter:
+    image: jupyter/datascience-notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - shared-data:/home/jovyan
+    restart: on-failure
+    
+    # replace the hashed password in this command with your own generated with IPython.lib.passwd
+    command: /home/root/startup_playground.sh # --NotebookApp.base_url=/home/jovyan
+
+  rstudio:
+    image: rocker/geospatial
+    ports:
+      - "8787:8787"
+    volumes:
+      - shared-data:/home/rstudio/shareddata
+    restart: on-failure
+
+volumes:
+  shared-data:
